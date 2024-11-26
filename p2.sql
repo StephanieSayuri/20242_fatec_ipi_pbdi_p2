@@ -153,7 +153,24 @@ $$;
 -- Dentre os alunos que têm salário maior que 410, quantos costumam se preparar com
 -- frequência (regularmente) para os exames? Escreva uma função que devolva esse número.
 -- Mensagem de commit: feat(p2): salario versus estudos
+CREATE OR REPLACE FUNCTION fn_atividade_4() RETURNS INT
+LANGUAGE plpgsql AS $$
+DECLARE
+	p_resultado INT;
+BEGIN
+	SELECT COUNT(*) FROM student_prediction WHERE salary = 5 AND prep_exam = 2 INTO p_resultado;
+	RETURN p_resultado;
+END;
+$$;
 
+DO $$
+DECLARE
+  resultado INT;
+BEGIN
+	SELECT fn_atividade_4() INTO resultado;
+	RAISE NOTICE 'Quantidade: %', resultado;
+END;
+$$;
 
 
 -- 5 Entrega final
