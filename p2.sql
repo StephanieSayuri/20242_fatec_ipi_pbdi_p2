@@ -116,7 +116,17 @@ SELECT * FROM student_prediction;
 -- Escreva um stored procedure que exibe o número de alunos aprovados e cujos pais são
 -- ambos PhDs.
 -- Mensagem de commit: feat(p2):aprovados com pais phds
-
+CREATE OR REPLACE PROCEDURE sp_atividade_2()
+LANGUAGE plpgsql AS $$
+DECLARE
+	quantidade INT;
+BEGIN
+	  SELECT COUNT(*) FROM student_prediction WHERE grade != 0 AND mother_edu = 6 AND father_edu = 6 INTO quantidade;
+	  
+	  RAISE NOTICE 'Quantidade: %', quantidade;
+END;
+$$;
+CALL sp_atividade_2();
 
 
 -- 3 Resultado em função dos estudos
