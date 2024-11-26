@@ -133,7 +133,20 @@ CALL sp_atividade_2();
 -- Escreva um stored procedure que disponibiliza, utilizando um parâmetro em modo OUT, o
 -- número de alunos aprovados dentre aqueles que estudam sozinhos.
 -- Mensagem de commit: feat(p2): aprovados que estudam sozinhos
-
+CREATE OR REPLACE PROCEDURE sp_atividade_3(OUT p_resultado INT)
+LANGUAGE plpgsql AS $$
+BEGIN
+	SELECT COUNT(*) FROM student_prediction WHERE grade != 0 AND prep_study = 1 INTO p_resultado;
+END;
+$$;
+DO $$
+DECLARE
+	v_resultado INT;
+BEGIN
+	CALL sp_atividade_3(v_resultado);
+	RAISE NOTICE 'Quantidade: %', v_resultado;
+END;
+$$;
 
 
 -- 4 Salário versus estudos
